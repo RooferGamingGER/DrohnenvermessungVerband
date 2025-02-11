@@ -6,23 +6,11 @@
 	{% load render_bundle from webpack_loader %}
 	{% render_bundle 'Dashboard' attrs='async' %}
 
-	<!--[if lte IE 8]>
-		<div class="alert alert-warning alert-dismissible">
-            WebODM cannot be used with this version of Internet Explorer. Could you please upgrade <a href="https://www.microsoft.com/en-us/download/internet-explorer.aspx">Internet Explorer</a> to the latest version or use <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>?
-        </div>
-	<![endif]-->
-
 	{% if no_processingnodes %}
 		{% include "quota.html" %}
 
-		<h3>{% trans 'Welcome!' %} ☺</h3>
-		{% trans 'Add a Processing Node' as add_processing_node %}
-		{% with nodeodm_link='<a href="https://github.com/OpenDroneMap/NodeODM" target="_blank">NodeODM</a>' api_link='<a href="https://github.com/OpenDroneMap/NodeODM/blob/master/docs/index.adoc" target="_blank">API</a>' %}
-			<p>
-			{% blocktrans %}To get started, "{{ add_processing_node }}". A processing node is a computer running an instance of {{ nodeodm_link }} or some other software implementing this {{ api_link }}.{% endblocktrans %}
-			</p>
-		{% endwith %}
-		<button class="btn btn-primary" onclick="location.href='{% url "admin:nodeodm_processingnode_add" %}';"><i class="fa fa-plus-circle"></i> {{ add_processing_node }}</button>
+		<h3>{% trans 'Willkommen!' %} ☺</h3>
+		{% trans 'Momentan ist kein Server vorhanden, wende dich an den Betreiber' as add_processing_node %}
 		
 	{% else %}
 		
@@ -34,12 +22,13 @@
 			</p>
 			<p>
 				<ul>
-					<li>{% trans 'Sie benötigen mindestens 5 Bilder, aber typischerweise sind 16-32 das Minimum.' %}</li>
+					<li>{% trans 'Für die größe eines Einfamilienhauses benötigst du ca. 60 - 80 Fotos. Wobei je mehr Fotos, desto besser wird das Ergebnis!' %}</li>
 					<li>{% trans 'Bilder müssen sich um 65% oder mehr überlappen. Zielen Sie auf 70-72% Überdeckung' %}</li>
-					<li>{% trans 'Je mehr Fotos vorliegen, desto besser werden bekanntlich die Ergebnisse.' %}</li>
+					<li>{% trans 'Mehr Bilder bedeuten in der Regel bessere Ergebnisse – das ist eine einfache Formel.' %}</li>
 					<li></li>
-					<li>{% trans 'Projekte die scheitern haben oftmals zu wenige Fotos oder es die GPS-Daten sind nicht korrekt' %}</li>
-					<li>{% trans 'Wenn die GPS-Daten Fehler aufweisen ist dies oftmals direkt bei der Erstellung ersichtlich, da statt einem Strassennamen nur ein Aufgabennamen vergeben wird' %}</li>
+					<li>{% trans 'Projekte, die nicht funktionieren, haben oft zwei Ursachen: zu wenige Bilder oder falsche GPS-Daten - dies passiert oftmals, wenn die ersten Fotos ohne GPS-Daten sind.' %}</li>
+					<li>{% trans 'Falsche oder fehlende GPS-Daten erkennst du meistens dran, wenn statt einem Straßennamen nur ein Aufgabenname angezeigt wird, versuche das Projekt ohne die ersten beiden Aufnahmen zu starten.' %}</li>
+					<li>{% trans 'Sollten Fragen oder Probleme auftreten, stehe ich gerne zur Verfügung.' %}</li>
 					
 
 				</ul>
