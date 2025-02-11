@@ -555,36 +555,6 @@ class EditTaskForm extends React.Component {
         )}
         </select>
 
-        {!this.state.presetActionPerforming ?
-        <div className="btn-group presets-dropdown">
-            <button type="button" className="btn btn-sm btn-default" title={_("Edit Task Options")} onClick={this.handleEditPreset}>
-            <i className="fa fa-sliders-h"></i> {_("Edit")}
-            </button>
-            <button type="button" className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                <span className="caret"></span>
-            </button>
-            <ul className="dropdown-menu">
-            <li>
-                <a href="javascript:void(0);" onClick={this.handleEditPreset}><i className="fa fa-sliders-h"></i> {_("Edit")}</a>
-            </li>
-            <li className="divider"></li>
-
-            {this.state.selectedPreset.id !== -1 ?
-                <li>
-                <a href="javascript:void(0);" onClick={this.handleDuplicateSavePreset}><i className="fa fa-copy"></i> {_("Duplicate")}</a>
-                </li>
-            :
-                <li>
-                <a href="javascript:void(0);" onClick={this.handleDuplicateSavePreset}><i className="fa fa-save"></i> {_("Save")}</a>
-                </li>
-            }
-            <li className={this.state.selectedPreset.system ? "disabled" : ""}>
-                <a href="javascript:void(0);" onClick={this.handleDeletePreset}><i className="fa fa-trash"></i> {_("Delete")}</a>
-            </li>
-            </ul>
-        </div>
-        : <i className="preset-performing-action-icon fa fa-cog fa-spin fa-fw"></i>}
-        <ErrorMessage className="preset-error" bind={[this, 'presetError']} />
       </div>);
 
       let tagsField = "";
