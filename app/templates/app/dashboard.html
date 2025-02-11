@@ -3,6 +3,9 @@
 {% load settings %}
 
 {% block content %}
+	{% load render_bundle from webpack_loader %}
+	{% render_bundle 'Dashboard' attrs='async' %}
+
 	<!--[if lte IE 8]>
 		<div class="alert alert-warning alert-dismissible">
             WebODM cannot be used with this version of Internet Explorer. Could you please upgrade <a href="https://www.microsoft.com/en-us/download/internet-explorer.aspx">Internet Explorer</a> to the latest version or use <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>?
@@ -22,8 +25,7 @@
 		<button class="btn btn-primary" onclick="location.href='{% url "admin:nodeodm_processingnode_add" %}';"><i class="fa fa-plus-circle"></i> {{ add_processing_node }}</button>
 		
 	{% else %}
-		{% include "quota.html" %}
-
+		
 		{% if no_tasks %}
 			<h3>{% trans 'Welcome!' %} ☺</h3>
 			{% trans 'Select Images and GCP' as upload_images %}
@@ -32,37 +34,21 @@
 			</p>
 			<p>
 				<ul>
-					<li>{% trans 'You need at least 5 images, but 16-32 is typically the minimum.' %}</li>
-					<li>{% trans 'Images must overlap by 65% or more. Aim for 70-72%' %}</li>
-					<li>{% trans 'For great 3D, images must overlap by 83%' %}</li>
-					<li>{% gcp_docs_link as gcp_link %}{% blocktrans with link_start=gcp_link|safe link_end='</a>' %}A {{link_start}}GCP File{{link_end}} is optional, but can increase georeferencing accuracy{% endblocktrans %}</li>
+					<li>{% trans 'Sie benötigen mindestens 5 Bilder, aber typischerweise sind 16-32 das Minimum.' %}</li>
+					<li>{% trans 'Bilder müssen sich um 65% oder mehr überlappen. Zielen Sie auf 70-72% Überdeckung' %}</li>
+					<li>{% trans 'Je mehr Fotos vorliegen, desto besser werden bekanntlich die Ergebnisse.' %}</li>
+					<li></li>
+					<li>{% trans 'Projekte die scheitern haben oftmals zu wenige Fotos oder es die GPS-Daten sind nicht korrekt' %}</li>
+					<li>{% trans 'Wenn die GPS-Daten Fehler aufweisen ist dies oftmals direkt bei der Erstellung ersichtlich, da statt einem Strassennamen nur ein Aufgabennamen vergeben wird' %}</li>
+					
+
 				</ul>
 			</p>
 		{% endif %}
 		
-		<div id="dashboard-app" data-dashboard
-			{% for key, value in params %}
-				data-{{key}}="{{value}}"
-			{% endfor %}
-		>
-			<div id="dashboard-placeholder" style="height: 100%">
-				<div style="display: flex; margin-top: 4px">
-					<div style="width: 90%"></div>
-					<div class="placeholder-item border shimmer" style="width: 10%; height: 34px; margin-right: 4px;"></div>
-				</div>
-				<div style="display: flex; margin-top: 4px">
-					<div style="width: 95%"></div>
-					<div class="placeholder-item border shimmer" style="width: 5%; height: 28px; margin-right: 4px;"></div>
-				</div>
-			
-				<div class="placeholder-item pulse border shimmer" style="height: 100px; margin-top: 16px; width: 100%;"></div>
-				<div class="placeholder-item pulse border shimmer" style="height: 100px; margin-top: 16px; width: 100%;"></div>
-				<div class="placeholder-item pulse border shimmer" style="height: 100px; margin-top: 16px; width: 100%;"></div>
-			</div>
-		</div>
-		
-	{% endif %}
+		{% include "quota.html" %}
 
-	{% load render_bundle from webpack_loader %}
-	{% render_bundle 'Dashboard' attrs='async' %}
+		<div id="dashboard-app" data-dashboard></div>
+
+	{% endif %}
 {% endblock %}
