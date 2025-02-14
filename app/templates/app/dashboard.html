@@ -7,19 +7,16 @@
 	{% render_bundle 'Dashboard' attrs='async' %}
 
 	{% if no_processingnodes %}
-		{% include "quota.html" %}
 
-		<h3>{% trans 'Willkommen!' %} ☺</h3>
-		{% trans 'Momentan ist kein Server vorhanden, wende dich an den Betreiber' as add_processing_node %}
-		
+		<h3>{% 'Willkommen!' %} ☺</h3>
+		{% 'Momentan ist kein Server vorhanden, wende dich an den Betreiber' %}
+		{% endwith %}
 	{% else %}
 		
 		{% if no_tasks %}
-			<h3>{% trans 'Welcome!' %} ☺</h3>
-			{% trans 'Select Images and GCP' as upload_images %}
-			<p>
-				{% blocktrans %}To create a map, press the "{{ upload_images }}" button, or drag and drop some images into a project.{% endblocktrans %}
-			</p>
+			<h3>{% 'Willkommen!' %} ☺</h3>
+			{% 'Um ein neues Projekt zu starten, lade deine Bilder hoch!' }
+	
 			<p>
 				<ul>
 					<li>{% trans 'Für die größe eines Einfamilienhauses benötigst du ca. 60 - 80 Fotos. Wobei je mehr Fotos, desto besser wird das Ergebnis!' %}</li>
@@ -34,8 +31,6 @@
 				</ul>
 			</p>
 		{% endif %}
-		
-		{% include "quota.html" %}
 
 		<div id="dashboard-app" data-dashboard></div>
 
